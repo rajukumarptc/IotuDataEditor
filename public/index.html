@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html ng-app="iotuEditorApp">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>IoTU Editor</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="/js/jquery.min.js"></script><!-- load jquery -->
+    <script src="/js/angular.min.js"></script><!-- load angular -->
+    <script src="/js/moment.min.js"></script><!-- load moment -->
+
+    <script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h2>IoTU Editor App</h2>
+        <span class="label label-info">{{ courses.length }}</span>
+    </div>
+
+    <div ng-show="courses.length > 0">
+        <button ng-click="toggle = !toggle">See Raw json</button>
+        <pre ng-show="toggle">{{courses | json}}</pre>
+    </div>
+    <br>
+
+    <table class="table"  ng-show="courses.length > 0">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Summary</th>
+            <th>Type</th>
+            <th>Launch Link</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="course in courses">
+            <td>{{course.courseId}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.summary}}</td>
+            <td>{{course.type}}</td>
+            <td><a ng-href="{{course.launchLink}}">{{course.launchLink}}</a></td>
+            <td>{{moment(course.createdAt).fromNow()}}</td>
+            <td><button ng-click = "deleteCourse(course._id)">Delete</button></td>
+        </tr>
+    </table>
+
+    <!--<input type="checkbox" ng-click="deleteCourse(course._id)">-->
+    <!-- <p> Created at: {{course.createdAt | date : "medium"}}</p> -->
+    <!--<span style="color: red">({{moment(course.createdAt).fromNow();}})</span>-->
+
+</div>
+
+<!-- FORM TO CREATE COURSE -->
+<div id="todo-form" class="row">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+        <h2>Create A new Course</h2>
+        <form>
+            <div class="form-group">
+                <label>Course Id</label>
+                <input type="text"
+                       class="form-control input-lg text-center"
+                       placeholder="Enter a course id"
+                       ng-model="formData.courseId"
+                       name="courseId"
+                       required="true">
+            </div>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text"
+                       class="form-control input-lg text-center"
+                       placeholder="Enter a title"
+                       ng-model="formData.title"
+                       name="title"
+                       required="true">
+            </div>
+
+            <div class="form-group">
+                <label>Summary</label>
+                <input type="text"
+                       class="form-control input-lg text-center"
+                       placeholder="Enter a summary"
+                       ng-model="formData.summary"
+                       name="summary">
+            </div>
+
+            <div class="form-group">
+                <label>Course type</label>
+                <input type="text"
+                       class="form-control input-lg text-center"
+                       placeholder="Enter Course type"
+                       ng-model="formData.type"
+                       name="type"
+                       required="true">
+            </div>
+
+            <div class="form-group">
+                <label>Launch Url</label>
+                <input type="text"
+                       class="form-control input-lg text-center"
+                       placeholder="Enter Course launch link"
+                       ng-model="formData.launchLink"
+                       name="launchLink"
+                       required="true">
+            </div>
+
+            <!--<div class="form-group">-->
+            <!--<h5 align="left">Course ID</h5>-->
+            <!--<input type="text" class="form-control" placeholder="Enter a course id" ng-model="formData.courseId"-->
+            <!--required="true">-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+            <!--<h5 align="left">Title</h5>-->
+            <!--<input type="text" class="form-control" placeholder="Enter a id" ng-model="formData.title.id"-->
+            <!--required="true">-->
+            <!--<input type="text" class="form-control" placeholder="Enter a name" ng-model="formData.title.name"-->
+            <!--required="true">-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+            <!--<h5 align="left">Summary</h5>-->
+            <!--<input type="text" class="form-control" placeholder="Enter Summary" ng-model="formData.summary"-->
+            <!--required="true">-->
+            <!--</div>-->
+
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="createCourse()">Add</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

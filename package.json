@@ -1,0 +1,30 @@
+{
+  "name": "iotudatacreater",
+  "version": "1.0.0",
+  "description": "Manage IoTU data",
+  "main": "index.js",
+  "scripts": {
+    "test": "iotu",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajukumarptc/IotuDataEditor.git"
+  },
+  "keywords": [
+    "IoTU"
+  ],
+  "author": "rakumar@ptc.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.13.4"
+  },
+  "bugs": {
+    "url": "https://github.com/rajukumarptc/IotuDataEditor/issues"
+  },
+  "homepage": "https://github.com/rajukumarptc/IotuDataEditor#readme"
+}
